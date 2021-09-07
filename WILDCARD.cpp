@@ -8,16 +8,16 @@ bool match(int w, int s) {
     int& ret = cashe[w][s];
     if (ret != -1) return ret;
 
-    while(w < W.size() && s < S.size() && (W[w] == '?' || W[w] == S[s]) {
+    while(w < W.size() && s < S.size() && (W[w] == '?' || W[w] == S[s])) {
         ++w, ++s;
     }
 
     if (w == W.size())
-        return ret = (s == s.size());
+        return ret = (s == S.size());
 
     if (W[w] == '*')
         for (int skip = 0; s + skip <= S.size(); ++skip) {
-            if (match(w + 1, s + skip)
+            if (match(w + 1, s + skip))
                 return ret = 1;
         }
 
@@ -45,7 +45,7 @@ int main() {
 
             priority_queue<string> pq;
             if (match(0, 0)) {
-                pq.push(s);
+                pq.push(S);
             }
 
             while (!pq.empty()) {
