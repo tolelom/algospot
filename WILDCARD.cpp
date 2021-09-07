@@ -1,23 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool match(string w, string s) {
-    int pos = 0;
-    
-    while (pos < s.size() && pos < w.size() && (w[pos] == '?' || w[pos] == s[pos])) {
-        pos++;
+int cashe[101][101];
+string W, S;
+
+bool match(int w, int s) {
+    int& ret = cashe[w][s];
+    if (ret != -1) return ret;
+
+    while(w < W.size() && s < S.size() && (W[w] == '?' || W[w] == S[s]) {
+        ++w, ++s;
     }
 
-    if (pos == w.size())
-        return pos == s.size();
+    if (w == W.size())
+        return ret = (s == s.size());
 
-    if (w[pos] == '*')
-        for (int skip = 0; pos + skip <= s.size(); ++skip) {
-            if (match(w.substr(pos + 1), s.substr(pos + skip)))
-                return true;
+    if (W[w] == '*')
+        for (int skip = 0; s + skip <= S.size(); ++skip) {
+            if (match(w + 1, s + skip)
+                return ret = 1;
         }
 
-    return false;
+    return ret = 0;
 }
 
 
@@ -29,18 +33,18 @@ int main() {
     cin >> c;
 
     while(c--) {
-        string w;
-        cin >> w;
+        memset(cashe, -1, sizeof(cashe));
+
+        cin >> W;
 
         int n;
         cin >> n;
 
         while(n--) {
-            string s;
-            cin >> s;
+            cin >> S;
 
             priority_queue<string> pq;
-            if (match(w, s)) {
+            if (match(0, 0)) {
                 pq.push(s);
             }
 
