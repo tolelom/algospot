@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+priority_queue<string, vector<string>, greater<string>> pq;
 int cashe[101][101];
 string W, S;
 
@@ -33,25 +34,21 @@ int main() {
     cin >> c;
 
     while(c--) {
-        memset(cashe, -1, sizeof(cashe));
-
         cin >> W;
 
-        int n;
-        cin >> n;
+        int n; cin >> n;
 
         while(n--) {
             cin >> S;
 
-            priority_queue<string> pq;
-            if (match(0, 0)) {
+            memset(cashe, -1, sizeof(cashe));
+            if (match(0, 0) == 1)
                 pq.push(S);
-            }
-
-            while (!pq.empty()) {
-                cout << pq.top() << '\n';
-                pq.pop();
-            }
         }
+    }
+
+    while(!pq.empty()) {
+        cout << pq.top() << '\n';
+        pq.pop();
     }
 }
