@@ -38,8 +38,15 @@ int main() {
         while(n--) {
             string s;
             cin >> s;
+
+            priority_queue<string> pq;
             if (match(w, s)) {
-                cout << s << '\n';
+                pq.push(s);
+            }
+
+            while (!pq.empty()) {
+                cout << pq.top() << '\n';
+                pq.pop();
             }
         }
     }
