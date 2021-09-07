@@ -24,7 +24,7 @@ vector<int> multiply(const vector<int>& a, const vector<int>& b) {
         for (int j = 0; j < b.size(); ++j)
             c[i + j] += a[i] * b[j];
 
-    normalize(c);
+    //normalize(c);
     return c;
 }
 
@@ -35,14 +35,14 @@ void addTo(vector<int>& a, const vector<int>& b, int k) {
     for (int i = k; i < newsize; i++) {
         a[i] = a[i] + b[i - k];
     }
-    normalize(a);
+    //normalize(a);
 }
  
 void subFrom(vector<int> &a, const vector<int>& b) {
     for (int i = 0; i < b.size(); i++) {
         a[i] -= b[i];
     }
-    normalize(a);
+    //normalize(a);
 }
  
 
@@ -82,13 +82,14 @@ int hugs(const string& members, const string& fans) {
     int n = members.size(), m = fans.size();
     vector<int> a(n), b(m);
     for (int i = 0; i < n; ++i) a[i] = (members[i] == 'M');
-    for (int i = 0; i < m; ++i) b[i] = (members[i] == 'M');
+    for (int i = 0; i < m; ++i) b[i] = (fans[i] == 'M');
 
     vector<int> c = karatsuba(a, b);
     int allHugs = 0;
-    for (int i = n - 1; i < m; ++i)
+    for (int i = n - 1; i < m; ++i) {
         if (c[i] == 0)
             ++allHugs;
+    }
 
     return allHugs;
 }
@@ -101,23 +102,10 @@ int main() {
     cin >> c;
 
     while(c--) {
-        string a, b;
-        cin >> a >> b;
-
-        if (a.length() > b.length()) a.swap(b);
-
-        int ans = 0;
-        for (int i = 0; i < b.length() - a.length() + 1; ++i) {
-            bool flag = true;
-            for (int j = 0; j < a.length(); ++j) {
-                if (a[j] == 'M' && b[i + j] == 'M') {
-                    flag = false;
-                    break;
-                }
-            }
-
-            if (flag) ans++;
-        }
-        cout << ans << '\n';
+        string members, fans;
+        cin >> members >> fans;
+        
+        reverse(fans.begin(), fans.end());
+        cout << hugs(members, fans) << '\n';
     }
 }
