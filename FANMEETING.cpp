@@ -1,3 +1,8 @@
+// 결국 실패했다
+// 시간 제한도 이상한 거 같고 
+// addTo 함수 같은데서 세그먼트 오류가 발생하는 듯 하다
+// normalize는 기본!
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -22,7 +27,7 @@ vector<int> multiply(const vector<int>& a, const vector<int>& b) {
     vector<int> c(a.size() + b.size() + 1, 0);
     for (int i = 0; i < a.size(); ++i) 
         for (int j = 0; j < b.size(); ++j)
-            c[i + j] += a[i] * b[j];
+            c[i + j] += (a[i] * b[j]);
 
     //normalize(c);
     return c;
@@ -31,9 +36,9 @@ vector<int> multiply(const vector<int>& a, const vector<int>& b) {
 
 void addTo(vector<int>& a, const vector<int>& b, int k) {
     int newsize = a.size() < b.size() + k ? b.size() + k : a.size();
-    while (a.size() != newsize) a.push_back(0);
+    //while (a.size() != newsize) a.push_back(0);
     for (int i = k; i < newsize; i++) {
-        a[i] = a[i] + b[i - k];
+        a[i] += + b[i - k];
     }
     //normalize(a);
 }
