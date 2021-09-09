@@ -3,10 +3,10 @@ using namespace std;
 
 string w, s;
 priority_queue<string, vector<string>, greater<string>> pq;
-int cashe[101][101];
+int cache[101][101];
 
 bool match(int wPos, int sPos) {
-    int& ret = cashe[wPos][sPos];
+    int& ret = cache[wPos][sPos];
     if (ret != -1) return ret;
 
     while (sPos < s.size() && wPos < w.size() && (w[wPos] == '?' || w[wPos] == s[sPos])) {
